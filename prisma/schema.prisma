@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  email    String  @unique
+  name     String
+  role     Role
+  password String
+  createdAt DateTime @default(now())
+  requests  Request[]
+}
+
+model Request {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  roomId    String   @db.ObjectId
+  userId    String   @db.ObjectId
+  role      Role
+  date      String
+  time      String
+  message   String
+  status    RequestStatus @default(pending)
+  source    Source?
+  sourceRef Int?
+  email     String?
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  room   Room   @relation(fields: [roomId], references: [id])
+}
+
+model Room {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  capacity   Int
+  facilities String[]
+  status     RoomStatus @default(free)
+  requests   Request[]
+}
+
+enum Role {
+  Student
+  Faculty
+  Organizer
+  Admin
+}
+
+enum RoomStatus {
+  free
+  reserved
+  occupied
+}
+
+enum RequestStatus {
+  pending
+  approved
+  rejected
+}
+
+enum Source {
+  teacher
+  organiser
+}
+
+

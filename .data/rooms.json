@@ -1,0 +1,31 @@
+[
+  {
+    "id": "A-101",
+    "name": "Classroom A-101",
+    "capacity": 40,
+    "facilities": [
+      "Projector"
+    ],
+    "status": "free"
+  },
+  {
+    "id": "B-207",
+    "name": "Lab B-207",
+    "capacity": 30,
+    "facilities": [
+      "Computers",
+      "WiFi"
+    ],
+    "status": "reserved"
+  },
+  {
+    "id": "H-101",
+    "name": "Seminar Hall A",
+    "capacity": 120,
+    "facilities": [
+      "Projector",
+      "Audio System"
+    ],
+    "status": "free"
+  }
+]
