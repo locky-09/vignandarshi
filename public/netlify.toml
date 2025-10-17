@@ -1,1 +1,11 @@
+[build]
+  command = "prisma generate && pnpm build"
+  publish = ".next"
 
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
